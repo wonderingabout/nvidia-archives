@@ -50,6 +50,24 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64
 ```
 A reboot is included to finalize the install of cuda and cudnn
 
+`nvcc --version` should now work
+
+it is also advised to update database (reboot to finalize) :
+
+```
+locate libcudart.so && locate libcudnn.so.7 && pwd && sudo updatedb && locate libcudart.so && locate libcudnn.so.7
+```
+should display something like this :
+
+```
+/usr/local/cuda-9.0/doc/man/man7/libcudart.so.7
+/usr/local/cuda-9.0/targets/x86_64-linux/lib/libcudart.so
+/usr/local/cuda-9.0/targets/x86_64-linux/lib/libcudart.so.9.0
+/usr/local/cuda-9.0/targets/x86_64-linux/lib/libcudart.so.9.0.176
+/usr/lib/x86_64-linux-gnu/libcudnn.so.7
+/usr/lib/x86_64-linux-gnu/libcudnn.so.7.1.4
+```
+
 ## easy install for tensorrt 3.0.4 ubuntu 16.04 :
 
 ```
