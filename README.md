@@ -53,7 +53,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64
 
 A reboot is included to finalize the install of cuda and cudnn
 
-`nvcc --version` should now work
+`nvcc --version` should just work now : 
+
+![nvcc-version-just-works](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/nvcc-version-just-works.png)
 
 it is also advised to update database (reboot to finalize) :
 
