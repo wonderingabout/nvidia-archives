@@ -6,7 +6,7 @@ See releases :
 
 https://github.com/wonderingabout/nvidia-archives/releases
 
-![screenshot](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/cudnn%20git%20download.png)
+![screenshot](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/cudnn%20git%20download.png?raw=true)
 
 "it just works", as nvidia said !
 
@@ -48,14 +48,14 @@ export CUDA_HOME=${CUDA_HOME}:/usr/local/cuda:/usr/local/cuda-9.0
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda-9.0/lib64
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64
 ```
-![etc-environment](https://github.com/wonderingabout/nvidia-archives/blob/master/nano-etc-environment.png)
-![bashrc](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/nano-bashrc.png)
+![etc-environment](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/nano-etc-environment.png?raw=true)
+![bashrc](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/nano-bashrc.png?raw=true)
 
 A reboot is included to finalize the install of cuda and cudnn
 
 `nvcc --version` should just work now : 
 
-![nvcc-version-just-works](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/nvcc-version-just-works.png)
+![nvcc-version-just-works](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/nvcc-version-just-works.png?raw=true)
 
 it is also advised to update database (reboot to finalize) :
 
