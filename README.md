@@ -10,36 +10,39 @@ https://github.com/wonderingabout/nvidia-archives/releases
 
 "it just works", as nvidia said !
 
-cudnn 7.1.4 for cuda 9.0 (deb) for ubuntu 16.04
+cudnn 7.0.5 (recommended for tensorrt 3.0.4) or 7.1.4 for cuda 9.0 (deb) for ubuntu 16.04
 tensorrt 3.0.4 for cuda 9.0 (deb) for ubuntu 16.04 
 
 # Easy installs
 
-## easy install help for cuda 9.0 ubuntu 16.04 :
+## easy install help for cuda 9.0 ubuntu 16.04 (deb + apt-get):
+
+on a brand new ubuntu 16.04, do not install anything, do **NOT** install nvidia-384, just !!
 
 ```
-wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb && sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb && sudo apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub && sudo apt-get update && sudo apt-get -y install cuda
+wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb && sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb && sudo apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub && sudo apt-get update && sudo apt-get -y install cuda && sudo reboot
 ```
 
-do not reboot yet, but keep installing cudnn 7.1.4
-
-## easy install help for cudnn 7.1.4 ubuntu 16.04 :
+after reboot, install nvidia-cuda-toolkit and cublas : 
 
 ```
-wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.1.4/libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.1.4/libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.1.4/libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
+sudo apt-get -y install nvidia-cuda-toolkit && nvcc -- version && wget https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/1/cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo apt-get update && sudo apt-get -y upgrade
+```
+
+## : easy install help for cudnn 7.0.5 ubuntu 16.04 (deb):
+
+```
+https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
 ```
 do not reboot yet, but do the post-install (needed) of adding paths
 
-## easy post-install for cuda 9.0 cudnn 7.1.4 ubuntu 16.04 :
+## easy post-install for cuda 9.0 cudnn 7.0.5 ubuntu 16.04 :
 
 ```
-sudo nano /etc/environment && sudo nano ~/.bashrc && source ~/.bashrc && sudo reboot
+sudo nano ~/.bashrc && source ~/.bashrc
 ```
 
-in first file need to add this (including the `:` ,at the the end of file, before `"`, save and exit):
-`:/usr/local/cuda-9.0/bin`
-
-in second file need to add this (at the end of the file, save and exit)
+need to add this (at the end of the file, save and exit)
 
 ```
 # add paths for cuda-9.0
@@ -48,12 +51,10 @@ export CUDA_HOME=${CUDA_HOME}:/usr/local/cuda:/usr/local/cuda-9.0
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda-9.0/lib64
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64
 ```
-![etc-environment](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/nano-etc-environment.png?raw=true)
+
 ![bashrc](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/nano-bashrc.png?raw=true)
 
-A reboot is included to finalize the install of cuda and cudnn
-
-`nvcc --version` should just work now : 
+`nvcc --version` should just works : 
 
 ![nvcc-version-just-works](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/nvcc-version-just-works.png?raw=true)
 
@@ -78,7 +79,52 @@ should display something like this :
 /usr/lib/x86_64-linux-gnu/libcudnn.so.7.1.4
 ```
 
-## easy install for tensorrt 3.0.4 ubuntu 16.04 :
+# Easy install of tensorrt 3.0.4 + pycuda (tar)
+
+Then for tensorrt 3.0.4 tar install : 
+
+post install first : 
+
+```
+sudo nano ~/.bashrc && source ~/.bashrc
+```
+
+add these lines : 
+
+```
+# tensorrt tar install path
+export LD_LIBRARY_PATH=/opt/tensorrt/lib:$LD_LIBRARY_PATH
+```
+
+This one requires cudnn 7.0 , it also includes python install, uff install, and cuda cudnn other path exports
+
+```
+cd ~ && wget https://github.com/wonderingabout/nvidia-archives/releases/download/run-tar-install/TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && tar zxvf TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && ls TensorRT-3.0.4 && sudo mv TensorRT-3.0.4 /opt/ && cd /opt && ls && sudo ln -s TensorRT-3.0.4/ tensorrt && cd /opt/tensorrt/python && sudo apt-get -y install python-pip && pip --version && sudo pip2 install tensorrt-3.0.4-cp27-cp27mu-linux_x86_64.whl
+```
+
+Then during the bazel install, tensorrt path needs to be this instead : 
+
+/opt/tensorrt/ or /opt/tensorrt/lib
+
+
+# Alternative ways
+
+## optionnal (can be skipped) post install of cuda : 
+
+```
+sudo nano /etc/environment
+```
+
+not needed, but if you want : add this (including the `:` ,at the the end of file, before `"`, save and exit):
+`:/usr/local/cuda-9.0/bin`
+
+![etc-environment](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/nano-etc-environment.png?raw=true)
+
+```
+sudo reboot
+```
+
+## (alternative way) easy install for tensorrt 3.0.4 ubuntu 16.04 (deb) :
 
 ```
 wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt3.0.4/nv-tensorrt-repo-ubuntu1604-ga-cuda9.0-trt3.0.4-20180208_1-1_amd64.deb && sudo dpkg -i nv-tensorrt-repo-ubuntu1604-ga-cuda9.0-trt3.0.4-20180208_1-1_amd64.deb && sudo apt-get update && sudo apt-get -y install tensorrt && sudo apt-get -y install python-libnvinfer-doc && sudo apt-get -y install uff-converter-tf && sudo apt-get install -y swig && dpkg -l | grep TensorRT && sudo reboot
@@ -95,52 +141,21 @@ wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorr
 
 add paths as we saw earlier then reboots are included
 
-# Easy install (tar)
 
-First, path export for cuda and cudnn is the same as for deb
-
-Then for tensorrt 3.0.4 tar install : 
-
-post install first : 
-
-```
-sudo nano ~/.bashrc
-```
-
-then add these lines : 
-
-```
-# tensorrt tar install path
-export LD_LIBRARY_PATH=/opt/tensorrt/lib:$LD_LIBRARY_PATH
-```
-
-then : 
-
-```
-source ~/.bashrc
-```
-
-
-This one requires cudnn 7.0 !!
-
-it also includes python install
-
-```
-cd ~ && wget https://github.com/wonderingabout/nvidia-archives/releases/download/run-tar-install/TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && tar zxvf TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && ls TensorRT-3.0.4 && sudo mv TensorRT-3.0.4 /opt/ && cd /opt && ls && sudo ln -s TensorRT-3.0.4/ tensorrt && cd /opt/tensorrt/python && sudo apt-get -y install python-pip && pip --version && sudo pip2 install tensorrt-3.0.4-cp27-cp27mu-linux_x86_64.whl
-```
-
-Then during the bazel install, tensorrt path needs to be this instead : 
-
-/opt/tensorrt/ or /opt/tensorrt/lib
 
 # Credits : 
 
+Biggest sources : 
+
 - https://medium.com/@mishra.thedeepak/cuda-and-cudnn-installation-for-tensorflow-gpu-79beebb356d2
 
-- https://medium.com/@zhanwenchen/install-cuda-and-cudnn-for-tensorflow-gpu-on-ubuntu-79306e4ac04e
+- https://kezunlin.me/post/dacc4196/
+
+Smaller sources :
+
 
 - https://developer.nvidia.com/rdp/cudnn-archive
 
 - https://developer.nvidia.com/nvidia-tensorrt3-download
 
-- https://kezunlin.me/post/dacc4196/
+- https://medium.com/@zhanwenchen/install-cuda-and-cudnn-for-tensorflow-gpu-on-ubuntu-79306e4ac04e
