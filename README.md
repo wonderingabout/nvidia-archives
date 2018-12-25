@@ -26,13 +26,13 @@ wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-re
 after reboot, install nvidia-cuda-toolkit and cublas : 
 
 ```
-sudo apt-get -y install nvidia-cuda-toolkit && nvcc -- version && wget https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/1/cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo apt-get update && sudo apt-get -y upgrade
+sudo apt-get -y install nvidia-cuda-toolkit && nvcc -- version && wget https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/1/cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y install cuda-command-line-tools-9-0
 ```
 
 ## easy install help for cudnn 7.0.5 ubuntu 16.04 (deb):
 
 ```
-sudo apt-get -y install cuda-command-line-tools-9-0 && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
+wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
 ```
 do not reboot yet, but do the post-install (needed) of adding paths
 
@@ -110,9 +110,13 @@ then the tar install :
 cd ~ && wget https://github.com/wonderingabout/nvidia-archives/releases/download/run-tar-install/TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && tar zxvf TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && ls TensorRT-3.0.4 && sudo mv TensorRT-3.0.4 /opt/ && cd /opt && ls && sudo ln -s TensorRT-3.0.4/ tensorrt && cd /opt/tensorrt/python && sudo apt-get -y install python-pip && pip --version && sudo pip2 install tensorrt-3.0.4-cp27-cp27mu-linux_x86_64.whl && cd /opt/tensorrt/uff && sudo pip2 install uff-0.2.0-py2.py3-none-any.whl && which convert-to-uff && sudo apt-get -y install tree && cd /opt/tensorrt && tree include/ && cd lib && ls && cd .. && tree bin && cd samples/sampleMNIST && ls && make -j8 && cd /opt/tensorrt/bin && ./sample_mnist
 ```
 
+example of pycuda works : 
+
+![pycuda-works](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/pycuda%20works.png?raw=true)
+
 example of result : 
 
-![tensorrt compile](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/tensorrt%20tar%204.png?raw=true)
+![tensorrt-compile](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/tensorrt%20tar%204.png?raw=true)
 
 You can now reboot if you want, to finalize
 
