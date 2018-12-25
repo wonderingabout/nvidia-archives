@@ -60,8 +60,13 @@ A reboot is included to finalize the install of cuda and cudnn
 it is also advised to update database (reboot to finalize) :
 
 ```
-locate libcudart.so && locate libcudnn.so.7 && pwd && sudo updatedb && locate libcudart.so && locate libcudnn.so.7
+locate libcudart.so && locate libcudnn.so.7 && pwd
 ```
+
+```
+sudo updatedb && locate libcudart.so && locate libcudnn.so.7
+```
+
 should display something like this :
 
 ```
