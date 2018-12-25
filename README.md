@@ -121,12 +121,12 @@ source ~/.bashrc
 ```
 
 
-This one requires cudnn 7.0 !! (but we'll try with 7.1 first)
+This one requires cudnn 7.0 !!
 
 it also includes python install
 
 ```
-cd ~ && wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt3.0.4/TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && tar zxvf TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && ls TensorRT-3.0.4 && sudo mv TensorRT-3.0.4 /opt/ && cd /opt && ls && sudo ln -s TensorRT-3.0.4/ tensorrt && cd /opt/tensorrt/python && sudo apt-get -y install python-pip && pip --version && sudo pip2 install tensorrt-3.0.4-cp27-cp27mu-linux_x86_64.whl
+cd ~ && wget https://github.com/wonderingabout/nvidia-archives/releases/download/run-tar-install/TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && tar zxvf TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && ls TensorRT-3.0.4 && sudo mv TensorRT-3.0.4 /opt/ && cd /opt && ls && sudo ln -s TensorRT-3.0.4/ tensorrt && cd /opt/tensorrt/python && sudo apt-get -y install python-pip && pip --version && sudo pip2 install tensorrt-3.0.4-cp27-cp27mu-linux_x86_64.whl
 ```
 
 Then during the bazel install, tensorrt path needs to be this instead : 
