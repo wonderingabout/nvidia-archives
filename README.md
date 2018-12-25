@@ -80,7 +80,7 @@ wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorr
 ```
 A reboot is included to finalize the install of tensorrt
 
-# Ultimate install, all in one (for splurgist people) cuda9.0+cudnn7.1.4+paths+reboot1+tensorrt3.0.4+reboot2 :
+# Ultimate install (deb), all in one (for splurgist people) cuda9.0+cudnn7.1.4+paths+reboot1+tensorrt3.0.4+reboot2 :
 
 ```
 wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb && sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb && sudo apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub && sudo apt-get update && sudo apt-get -y install cuda && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.1.4/libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.1.4/libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.1.4/libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN && sudo nano /etc/environment && sudo nano ~/.bashrc && source ~/.bashrc && sudo reboot
@@ -89,6 +89,44 @@ wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorr
 ```
 
 add paths as we saw earlier then reboots are included
+
+# Easy install (tar)
+
+First, path export for cuda and cudnn is the same as for deb
+
+Then for tensorrt 3.0.4 tar install : 
+
+post install first : 
+
+```
+sudo nano ~/.bashrc
+```
+
+then add these lines : 
+
+```
+# tensorrt tar install path
+export LD_LIBRARY_PATH=/opt/tensorrt/lib:$LD_LIBRARY_PATH
+```
+
+then : 
+
+```
+source ~/.bashrc
+```
+
+
+This one requires cudnn 7.0 !! (but we'll try with 7.1 first)
+
+it also includes python install
+
+```
+cd ~ && wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt3.0.4/TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && tar zxvf TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && ls TensorRT-3.0.4 && sudo mv TensorRT-3.0.4 /opt/ && cd /opt && ls && sudo ln -s TensorRT-3.0.4/ tensorrt && cd /opt/tensorrt/python && sudo apt-get -y install python-pip && pip --version && sudo pip2 install tensorrt-3.0.4-cp27-cp27mu-linux_x86_64.whl
+```
+
+Then during the bazel install, tensorrt path needs to be this instead : 
+
+/opt/tensorrt/ or /opt/tensorrt/lib
 
 # Credits : 
 
@@ -99,3 +137,5 @@ add paths as we saw earlier then reboots are included
 - https://developer.nvidia.com/rdp/cudnn-archive
 
 - https://developer.nvidia.com/nvidia-tensorrt3-download
+
+- https://kezunlin.me/post/dacc4196/
