@@ -26,7 +26,7 @@ wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-re
 after reboot, install nvidia-cuda-toolkit and cublas : 
 
 ```
-sudo apt-get -y install nvidia-cuda-toolkit && nvcc --version && wget https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/1/cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y install cuda-command-line-tools-9-0
+wget https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/1/cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y install cuda-command-line-tools-9-0 && nvcc --version
 ```
 
 ## easy post-install for cuda 9.0 and before cudnn ubuntu 16.04 :
@@ -165,6 +165,7 @@ then the tar install :
 
 ```
 cd ~ && wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt4.0.x-cudnn7.1.x/TensorRT-4.0.1.6.Ubuntu-16.04.4.x86_64-gnu.cuda-9.0.cudnn7.1.tar.gz && tar zxvf TensorRT-4.0.1.6.Ubuntu-16.04.4.x86_64-gnu.cuda-9.0.cudnn7.1.tar.gz && ls TensorRT-4.0.1.6 && sudo mv TensorRT-4.0.1.6 /opt/ && cd /opt && ls && sudo ln -s TensorRT-4.0.1.6/ tensorrt && cd /opt/tensorrt/python && sudo apt-get -y install python-pip && pip --version && sudo pip2 install tensorrt-4.0.1.6-cp27-cp27mu-linux_x86_64.whl && cd /opt/tensorrt/uff && sudo pip2 install uff-0.4.0-py2.py3-none-any.whl && which convert-to-uff && cd ../graphsurgeon && sudo pip2 install graphsurgeon-0.2.0-py2.py3-none-any.whl && sudo apt-get -y install tree && cd /opt/tensorrt && tree include/ && cd lib && ls && cd .. && tree bin && cd samples/sampleMNIST && ls && make -j8 && cd /opt/tensorrt/bin && ls && cp sample_mnist ../lib && cd ../lib && ./sample_mnist
+```
 
 # Alternative ways
 
@@ -199,8 +200,6 @@ wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorr
 ```
 
 add paths as we saw earlier then reboots are included
-
-
 
 # Credits : 
 
