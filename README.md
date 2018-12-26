@@ -55,7 +55,7 @@ export CUDNN_INSTALL_DIR=/usr/local/cuda
 
 ![nvcc-version-just-works](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/nvcc-version-just-works.png?raw=true)
 
-## easy install help for cudnn 7.0.5 ubuntu 16.04 (deb) (for tensorrt 3.0.x tar) :
+## easy install help for cudnn 7.0.5 ubuntu 16.04 (deb) for tensorrt 3.0.4 (tar) :
 
 ```
 wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
@@ -120,7 +120,35 @@ export CUDNN_INSTALL_DIR=/usr/local/cuda
 then the tar install :
 
 ```
-cd ~ && wget https://github.com/wonderingabout/nvidia-archives/releases/download/run-tar-install/TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && tar zxvf TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && ls TensorRT-3.0.4 && sudo mv TensorRT-3.0.4 /opt/ && cd /opt && ls && sudo ln -s TensorRT-3.0.4/ tensorrt && cd /opt/tensorrt/python && sudo apt-get -y install python-pip && pip --version && sudo pip2 install tensorrt-3.0.4-cp27-cp27mu-linux_x86_64.whl && cd /opt/tensorrt/uff && sudo pip2 install uff-0.2.0-py2.py3-none-any.whl && which convert-to-uff && sudo apt-get -y install tree && cd /opt/tensorrt && tree include/ && cd lib && ls && cd .. && tree bin && cd samples/sampleMNIST && ls && make -j8 && cd /opt/tensorrt/bin && ./sample_mnist
+cd ~ && wget https://github.com/wonderingabout/nvidia-archives/releases/download/run-tar-install/TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && tar zxvf TensorRT-3.0.4.Ubuntu-16.04.3.x86_64.cuda-9.0.cudnn7.0.tar.gz && ls TensorRT-3.0.4 && sudo mv TensorRT-3.0.4 /opt/ && cd /opt && ls && sudo ln -s TensorRT-3.0.4/ tensorrt && sudo apt-get -y install python-pip && pip --version
+```
+
+then add cuda.h file in /etc/profile.d as explained here (pycuda is faulty, not us), install pycuda separately : http://0561blue.tistory.com/m/13?category=627413
+
+```
+sudo nano /etc/profile.d/cuda.h
+```
+
+add this line : 
+
+```
+export PATH=/usr/local/cuda-7.0/bin:$PATH
+```
+
+then save and exit, then :
+
+```
+sudo su -
+pip install pycuda
+
+```
+then exit root mode and do :
+
+```
+cd /opt/tensorrt/python && sudo pip2 install tensorrt-3.0.4-cp27-cp27mu-linux_x86_64.whl
+cd /opt/tensorrt/uff && sudo pip2 install uff-0.2.0-py2.py3-none-any.whl
+which convert-to-uff
+sudo apt-get -y install tree && cd /opt/tensorrt && tree include/ && cd lib && ls && cd .. && tree bin && cd samples/sampleMNIST && ls && make -j8 && cd /opt/tensorrt/bin && ./sample_mnist
 ```
 
 example of pycuda works : 
@@ -135,10 +163,10 @@ You can now reboot if you want, to finalize
 
 Then during the bazel install, tensorrt path needs to be this instead : 
 
-/opt/tensorrt/
+/opt/tensorrt/lib/
 
 
-## Easy install of tensorrt 4.0.x + pycuda (tar)
+## (outdated, needs to add pycuda install steps too) Easy install of tensorrt 4.0.x + pycuda (tar)
 
 tar install allows to install pycuda (`.whl` and `.so`)
 
