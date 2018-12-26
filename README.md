@@ -26,7 +26,7 @@ wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-re
 after reboot, install nvidia-cuda-toolkit and cublas : 
 
 ```
-sudo apt-get -y install nvidia-cuda-toolkit && nvcc -- version && wget https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/1/cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y install cuda-command-line-tools-9-0
+sudo apt-get -y install nvidia-cuda-toolkit && nvcc --version && wget https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/1/cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y install cuda-command-line-tools-9-0
 ```
 
 ## easy install help for cudnn 7.0.5 ubuntu 16.04 (deb):
