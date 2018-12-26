@@ -29,14 +29,7 @@ after reboot, install nvidia-cuda-toolkit and cublas :
 sudo apt-get -y install nvidia-cuda-toolkit && nvcc --version && wget https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/1/cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y install cuda-command-line-tools-9-0
 ```
 
-## easy install help for cudnn 7.0.5 ubuntu 16.04 (deb):
-
-```
-wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
-```
-do not reboot yet, but do the post-install (needed) of adding paths
-
-## easy post-install for cuda 9.0 cudnn 7.0.5 ubuntu 16.04 :
+## easy post-install for cuda 9.0 and before cudnn ubuntu 16.04 :
 
 ```
 sudo nano ~/.bashrc && source ~/.bashrc
@@ -50,6 +43,10 @@ export PATH=${PATH}:/usr/local/cuda-9.0/bin
 export CUDA_HOME=${CUDA_HOME}:/usr/local/cuda:/usr/local/cuda-9.0
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda-9.0/lib64
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64
+
+# tensorrt cuda and cudnn other paths needed
+export CUDA_INSTALL_DIR=/usr/local/cuda
+export CUDNN_INSTALL_DIR=/usr/local/cuda
 ```
 
 ![bashrc](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/nano-bashrc.png?raw=true)
@@ -58,6 +55,20 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64
 
 ![nvcc-version-just-works](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/nvcc-version-just-works.png?raw=true)
 
+## easy install help for cudnn 7.0.5 ubuntu 16.04 (deb) (for tensorrt 3.0.x tar) :
+
+```
+wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
+```
+do not reboot yet, but do the post-install (needed) of adding paths
+
+# else, alternative cudnn 7.1.x deb for tensorrt 4.0.x tar :
+
+```
+wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt4.0.x-cudnn7.1.x/libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt4.0.x-cudnn7.1.x/libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt4.0.x-cudnn7.1.x/libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
+```
+
+## easy pot-install 2 after cudnn :
 it is also advised to update database (reboot to finalize) :
 
 ```
