@@ -132,7 +132,7 @@ sudo nano /etc/profile.d/cuda.h
 add this line : 
 
 ```
-export PATH=/usr/local/cuda-7.0/bin:$PATH
+export PATH=/usr/local/cuda-9.0/bin:$PATH
 ```
 
 then save and exit, then :
@@ -142,7 +142,7 @@ sudo su -
 pip install pycuda
 
 ```
-then exit root mode and do :
+then either in root mode or not, do :
 
 ```
 cd /opt/tensorrt/python && sudo pip2 install tensorrt-3.0.4-cp27-cp27mu-linux_x86_64.whl
@@ -163,7 +163,7 @@ You can now reboot if you want, to finalize
 
 Then during the bazel install, tensorrt path needs to be this instead : 
 
-/opt/tensorrt/lib/
+`/opt/tensorrt/lib/`
 
 
 ## (outdated, needs to add pycuda install steps too) Easy install of tensorrt 4.0.x + pycuda (tar)
