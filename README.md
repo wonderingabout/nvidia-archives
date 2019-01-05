@@ -62,7 +62,7 @@ do not reboot yet, but do the post-install (needed) of adding paths
 # else, alternative cudnn 7.1.x deb for tensorrt 4.0.x tar :
 
 ```
-wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt4.0.x-cudnn7.1.x/libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt4.0.x-cudnn7.1.x/libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt4.0.x-cudnn7.1.x/libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb sudo dpkg -i libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
+wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt4.0.x-cudnn7.1.x/libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt4.0.x-cudnn7.1.x/libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt4.0.x-cudnn7.1.x/libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
 ```
 
 ## easy pot-install 2 after cudnn :
