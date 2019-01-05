@@ -23,10 +23,10 @@ on a brand new ubuntu 16.04, do not install anything, do **NOT** install nvidia-
 wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb && sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb && sudo apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub && sudo apt-get update && sudo apt-get -y install cuda && sudo reboot
 ```
 
-after reboot, install nvidia-cuda-toolkit and cublas : 
+after reboot, check nvcc --version : 
 
 ```
-wget https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/1/cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64-deb && sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y install cuda-command-line-tools-9-0 && nvcc --version
+nvcc --version
 ```
 
 ## easy post-install for cuda 9.0 and before cudnn ubuntu 16.04 :
