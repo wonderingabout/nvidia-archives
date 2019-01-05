@@ -65,7 +65,7 @@ do not reboot yet, but do the post-install (needed) of adding paths
 wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt4.0.x-cudnn7.1.x/libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt4.0.x-cudnn7.1.x/libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt4.0.x-cudnn7.1.x/libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
 ```
 
-## easy pot-install 2 after cudnn :
+## easy post-install 2 after cudnn :
 it is also advised to update database (reboot to finalize) :
 
 ```
@@ -91,7 +91,15 @@ should display something like this :
 
 reboot is still not needed
 
-## Easy install of tensorrt 3.0.4 + pycuda (tar)
+## Easy install for tensorrt 3.0.4 ubuntu 16.04 (deb) :
+
+```
+wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt3.0.4/nv-tensorrt-repo-ubuntu1604-ga-cuda9.0-trt3.0.4-20180208_1-1_amd64.deb && sudo dpkg -i nv-tensorrt-repo-ubuntu1604-ga-cuda9.0-trt3.0.4-20180208_1-1_amd64.deb && sudo apt-get update && sudo apt-get -y install tensorrt && sudo apt-get -y install python-libnvinfer-doc && sudo apt-get -y install uff-converter-tf && sudo apt-get install -y swig && dpkg -l | grep TensorRT && sudo reboot
+```
+A reboot is appreciated to finalize the install of tensorrt
+
+
+## (alternative way) Easy install of tensorrt 3.0.4 + pycuda (tar)
 
 tar install allows to install pycuda (`.whl` and `.so`)
 
@@ -209,12 +217,6 @@ not needed, but if you want : add this (including the `:` ,at the the end of fil
 sudo reboot
 ```
 
-## (alternative way) easy install for tensorrt 3.0.4 ubuntu 16.04 (deb) :
-
-```
-wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt3.0.4/nv-tensorrt-repo-ubuntu1604-ga-cuda9.0-trt3.0.4-20180208_1-1_amd64.deb && sudo dpkg -i nv-tensorrt-repo-ubuntu1604-ga-cuda9.0-trt3.0.4-20180208_1-1_amd64.deb && sudo apt-get update && sudo apt-get -y install tensorrt && sudo apt-get -y install python-libnvinfer-doc && sudo apt-get -y install uff-converter-tf && sudo apt-get install -y swig && dpkg -l | grep TensorRT && sudo reboot
-```
-A reboot is appreciated to finalize the install of tensorrt
 
 # Ultimate install (deb), all in one (for splurgist people) cuda9.0+cudnn7.1.4+paths+reboot1+tensorrt3.0.4+reboot2 :
 
