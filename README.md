@@ -78,7 +78,7 @@ no need to reboot after that
 ## easy install help for cudnn 7.4.x (latest) ubuntu 18.04 (deb) (no need to tensorrt since batch size 16 phoenixgo) :
 
 ```
-wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.4.x-cuda10/libcudnn7_7.4.2.24-1+cuda10.0_amd64.deb https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.4.x-cuda10/libcudnn7-dev_7.4.2.24-1+cuda10.0_amd64.deb https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.4.x-cuda10/libcudnn7-doc_7.4.2.24-1+cuda10.0_amd64.deb && sudo dpkg -i libcudnn7_7.4.2.24-1+cuda10.0_amd64.deb cudnn7.4.x-cuda10/libcudnn7-dev_7.4.2.24-1+cuda10.0_amd64.deb cudnn7.4.x-cuda10/libcudnn7-doc_7.4.2.24-1+cuda10.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
+wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.4.x-cuda10/libcudnn7_7.4.2.24-1+cuda10.0_amd64.deb https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.4.x-cuda10/libcudnn7-dev_7.4.2.24-1+cuda10.0_amd64.deb https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.4.x-cuda10/libcudnn7-doc_7.4.2.24-1+cuda10.0_amd64.deb && sudo dpkg -i libcudnn7_7.4.2.24-1+cuda10.0_amd64.deb libcudnn7-dev_7.4.2.24-1+cuda10.0_amd64.deb libcudnn7-doc_7.4.2.24-1+cuda10.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
 ```
 do not reboot yet, but do the post-install (needed) of adding paths
 
