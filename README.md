@@ -29,13 +29,29 @@ after reboot, check nvcc --version :
 nvcc --version
 ```
 
-## easy post-install for cuda 9.0 and before cudnn ubuntu 16.04 :
+## easy install help for cuda 10.0 ubuntu 18.04 (deb network install for latest version + apt-get):
+
+on a brand new ubuntu 18.04, do not install anything, do **NOT** install nvidia-410, first run `sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo reboot` , then just !!
+
+```
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.0.130-1_amd64.deb && sudo dpkg -i cuda-repo-ubuntu1804_10.0.130-1_amd64.deb && sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub && sudo apt-get update && sudo apt-get install -y cuda && sudo reboot
+```
+
+after reboot, check nvcc --version : 
+
+```
+nvcc --version
+```
+
+## easy post-install for cuda 9.0 +/- 10.0 and before cudnn ubuntu 16.04/18.04 :
 
 ```
 sudo nano ~/.bashrc && source ~/.bashrc
 ```
 
 need to add this (at the end of the file, save and exit)
+
+(if using cuda 10.0 replace with cuda 10.0 instead) : 
 
 ```
 # add paths for cuda-9.0
@@ -56,6 +72,13 @@ export CUDNN_INSTALL_DIR=/usr/local/cuda
 
 ```
 wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb && wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.0.5/libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo dpkg -i libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb libcudnn7-doc_7.0.5.15-1+cuda9.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
+```
+no need to reboot after that
+
+## easy install help for cudnn 7.4.x (latest) ubuntu 18.04 (deb) (no need to tensorrt since batch size 16 phoenixgo) :
+
+```
+wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.4.x-cuda10/libcudnn7_7.4.2.24-1+cuda10.0_amd64.deb https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.4.x-cuda10/libcudnn7-dev_7.4.2.24-1+cuda10.0_amd64.deb https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.4.x-cuda10/libcudnn7-doc_7.4.2.24-1+cuda10.0_amd64.deb && sudo dpkg -i libcudnn7_7.4.2.24-1+cuda10.0_amd64.deb cudnn7.4.x-cuda10/libcudnn7-dev_7.4.2.24-1+cuda10.0_amd64.deb cudnn7.4.x-cuda10/libcudnn7-doc_7.4.2.24-1+cuda10.0_amd64.deb && sudo apt-get -y upgrade && cp -r /usr/src/cudnn_samples_v7/ ~ && cd ~/cudnn_samples_v7/mnistCUDNN && make clean && make && ./mnistCUDNN
 ```
 do not reboot yet, but do the post-install (needed) of adding paths
 
