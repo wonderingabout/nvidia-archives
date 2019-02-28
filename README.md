@@ -67,6 +67,7 @@ menu display out of curiosity :
 # install some cuda dependencies && \
 sudo apt-get install gcc dkms build-essential && \
 # download and install cuda && \
+cd ~ && \
 wget https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda-repo-ubuntu1804-10-0-local-10.0.130-410.48_1.0-1_amd64 && \
 ls && \
 sudo dpkg -i cuda-repo-ubuntu1804-10-0-local-10.0.130-410.48_1.0-1_amd64 && \
@@ -124,6 +125,7 @@ sudo reboot
 ## easy install help for cudnn 7.5.0 deb for cuda 10.0 deb ubuntu 18.04 :
 
 ```
+cd ~ && \
 wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.5.0deb-cuda10.0deb/libcudnn7_7.5.0.56-1+cuda10.0_amd64.deb https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.5.0deb-cuda10.0deb/libcudnn7-dev_7.5.0.56-1+cuda10.0_amd64.deb https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.5.0deb-cuda10.0deb/libcudnn7-doc_7.5.0.56-1+cuda10.0_amd64.deb && \
 sudo dpkg -i libcudnn7_7.5.0.56-1+cuda10.0_amd64.deb libcudnn7-dev_7.5.0.56-1+cuda10.0_amd64.deb libcudnn7-doc_7.5.0.56-1+cuda10.0_amd64.deb && \
 sudo apt-get -y upgrade && \
@@ -169,6 +171,7 @@ should display something like this :
 ## Easy install for tensorrt 5.0.2 deb ubuntu 18.04 :
 
 ```
+cd ~ && \
 wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt5.0.2deb-cuda10.0-ubuntu1804/nv-tensorrt-repo-ubuntu1804-cuda10.0-trt5.0.2.6-ga-20181009_1-1_amd64.deb && \
 sudo dpkg -i sudo dpkg -i nv-tensorrt-repo-ubuntu1804-cuda10.0-trt5.0.2.6-ga-20181009_1-1_amd64.deb && \
 sudo apt-key add /var/nv-tensorrt-repo-cuda10.0-trt5.0.2.6-ga-20181009/7fa2af80.pub && \
