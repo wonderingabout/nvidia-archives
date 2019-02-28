@@ -31,7 +31,9 @@ ubuntu **desktop** 18.04, it is easier to do the install in 2 steps :
 
 ### 0) upgrade system
 
-```sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo reboot```
+```
+sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo reboot
+```
 
 ### 1) install display driver only from ppa
 
@@ -42,7 +44,12 @@ breaks the X server
 but the ppa version has been tested to work
 for cuda 10.0, install nvidia-driver-410 metapackage
 
-```sudo apt-get -y install nvidia-driver-410 && sudo reboot```
+```
+sudo add-apt-repository -y ppa:graphics-drivers/ppa && \
+sudo apt-get update && \
+sudo apt-get -y install nvidia-driver-410 && \
+sudo reboot
+```
 
 ### 2) install cuda 10.0 deb local ubuntu 18.04 :
 
