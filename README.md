@@ -43,7 +43,8 @@ desktop ubuntu when nouveau is the default display driver often
 breaks the X server
 
 but the ppa version has been tested to work
-for cuda 10.0, install nvidia-driver-410 metapackage
+for cuda 10.0, we need to install nvidia-driver-410 metapackage, 
+even if newer versions are available 
 
 ```
 sudo add-apt-repository -y ppa:graphics-drivers/ppa && \
@@ -58,6 +59,9 @@ as you can see, it works after reboot :
 
 we can also see the "software and updates" ubuntu 
 menu display out of curiosity : 
+
+below, nvidia-driver-410 is displayed to be "open source", but 
+dont mind it : we are using the proprietary driver as intended
 
 ![ppa2](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/pictures/10.0/ppa2.png)
 
@@ -173,7 +177,7 @@ should display something like this :
 ```
 cd ~ && \
 wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt5.0.2deb-cuda10.0-ubuntu1804/nv-tensorrt-repo-ubuntu1804-cuda10.0-trt5.0.2.6-ga-20181009_1-1_amd64.deb && \
-sudo dpkg -i sudo dpkg -i nv-tensorrt-repo-ubuntu1804-cuda10.0-trt5.0.2.6-ga-20181009_1-1_amd64.deb && \
+sudo dpkg -i nv-tensorrt-repo-ubuntu1804-cuda10.0-trt5.0.2.6-ga-20181009_1-1_amd64.deb && \
 sudo apt-key add /var/nv-tensorrt-repo-cuda10.0-trt5.0.2.6-ga-20181009/7fa2af80.pub && \
 sudo apt-get update && \
 sudo apt-get -y install tensorrt && \
