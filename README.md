@@ -11,10 +11,6 @@ cudnn 7.5.0 deb for cuda 10.0
 tensorRT 5.0.2 deb for cuda 10.0
 ```
 
-See releases :
-
-https://github.com/wonderingabout/nvidia-archives/releases
-
 ![screenshot](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/cudnn%20git%20download.png?raw=true)
 
 "it just works", as nvidia said !
