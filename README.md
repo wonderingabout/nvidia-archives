@@ -86,7 +86,7 @@ do not reboot yet, do the post-install first :
 ## easy post-install for cuda 10.0 and before cudnn deb ubuntu 18.04 :
 
 ```
-sudo nano ~/.bashrc && source ~/.bashrc
+sudo nano ~/.bashrc
 ```
 
 need to add this (at the end of the file, save and exit) 
@@ -104,7 +104,13 @@ same as in this screenshot :
 
 ![cuda4](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/pictures/10.0/cuda4.png)
 
-now `nvcc --version` should just works (we also run `nvidia-smi` 
+then update system about the changes : 
+
+```
+source ~/.bashrc
+```
+
+now `nvcc --version` should just work (we also run `nvidia-smi` 
 out of curiosity) : 
 
 ![cuda5](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/pictures/10.0/cuda5.png)
