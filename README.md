@@ -23,32 +23,42 @@ https://github.com/wonderingabout/nvidia-archives/releases
 
 ## easy install help for cuda 10.0 local deb for ubuntu 18.04 :
 
-on a brand new ubuntu 18.04, do not install anything, do **NOT** install nvidia-410,
+- if you are on ubuntu server, you dont have X server issues, so you 
+can start directly at 2)
 
-first run : 
+- but if like most people you are on ubuntu desktop, on a brand new 
+ubuntu **desktop** 18.04, it is easier to do the install in 2 steps : 
+
+### 0) upgrade system
 
 ```sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo reboot```
 
-then just !!
+### 1) install display driver only from ppa
+
+this may seem uneeded, but installing the cuda 10.0 directly in 
+desktop ubuntu when nouveau is the default display driver often 
+breaks the X server
+
+but the ppa version has been tested to work
+for cuda 10.0, install nvidia-driver-410 metapackage
+
+```sudo apt-get -y install nvidia-driver-410 && sudo reboot```
+
+### 2) install cuda 10.0 deb local ubuntu 18.04 :
 
 ```
-sudo apt-get install gcc dkms build-essential linux-headers-generic && \
+# install some cuda dependencies && \
+sudo apt-get install gcc dkms build-essential && \
+# download and install cuda && \
 wget https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda-repo-ubuntu1804-10-0-local-10.0.130-410.48_1.0-1_amd64 && \
 ls && \
 sudo dpkg -i cuda-repo-ubuntu1804-10-0-local-10.0.130-410.48_1.0-1_amd64 && \
 sudo apt-key add /var/cuda-repo-10-0-local-10.0.130-410.48/7fa2af80.pub && \
 sudo apt-get update && \
-sudo apt-get -y install cuda && \
-sudo reboot
+sudo apt-get -y install cuda
 ```
 
-reboot to initialize nvidia driver
-
-then after reboot, check nvcc --version : 
-
-```
-nvcc --version
-```
+do not reboot yet, do the post-install first : 
 
 ## easy post-install for cuda 10.0 and before cudnn deb ubuntu 18.04 :
 
@@ -62,7 +72,7 @@ need to add this (at the end of the file, save and exit)
 # add paths for cuda-10.0
 export PATH=${PATH}:/usr/local/cuda-10.0/bin
 
-# tensorrt cuda and cudnn other paths needed
+# other nvidia paths that can be useful, for example for tensorrt
 export CUDA_INSTALL_DIR=/usr/local/cuda
 export CUDNN_INSTALL_DIR=/usr/local/cuda
 ```
@@ -72,6 +82,10 @@ export CUDNN_INSTALL_DIR=/usr/local/cuda
 `nvcc --version` should just works : 
 
 ![nvcc-version-just-works](https://github.com/wonderingabout/nvidia-archives/blob/master/pictures/nvcc-version-just-works.png?raw=true)
+
+now you can reboot to finalize
+
+```sudo reboot```
 
 ## easy install help for cudnn 7.5.0 deb for cuda 10.0 deb ubuntu 18.04 :
 
