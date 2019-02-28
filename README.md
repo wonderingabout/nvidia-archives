@@ -125,6 +125,13 @@ make clean && make && \
 ./mnistCUDNN
 ```
 
+some screenshots of the cudnn install process :
+
+![cudnn1](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/pictures/10.0/cudnn1.png)
+![cudnn2](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/pictures/10.0/cudnn2.png)
+![cudnn3](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/pictures/10.0/cudnn3.png)
+![cudnn4](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/pictures/10.0/cudnn4.png)
+
 ## easy post-install after cudnn :
 
 it is also advised to update database (reboot to finalize) :
@@ -142,40 +149,42 @@ sudo updatedb && locate libcudart.so && locate libcudnn.so.7
 should display something like this :
 
 ```
-/usr/local/cuda-9.0/doc/man/man7/libcudart.so.7
-/usr/local/cuda-9.0/targets/x86_64-linux/lib/libcudart.so
-/usr/local/cuda-9.0/targets/x86_64-linux/lib/libcudart.so.9.0
-/usr/local/cuda-9.0/targets/x86_64-linux/lib/libcudart.so.9.0.176
+/usr/local/cuda-10.0/doc/man/man7/libcudart.so.7
+/usr/local/cuda-10.0/targets/x86_64-linux/lib/libcudart.so
+/usr/local/cuda-10.0/targets/x86_64-linux/lib/libcudart.so.10.0
+/usr/local/cuda-10.0/targets/x86_64-linux/lib/libcudart.so.10.0.130
 /usr/lib/x86_64-linux-gnu/libcudnn.so.7
-/usr/lib/x86_64-linux-gnu/libcudnn.so.7.1.4
+/usr/lib/x86_64-linux-gnu/libcudnn.so.7.5.0
+
 ```
 
 ## Easy install for tensorrt 5.0.2 deb ubuntu 18.04 :
 
 ```
 wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt5.0.2deb-cuda10.0-ubuntu1804/nv-tensorrt-repo-ubuntu1804-cuda10.0-trt5.0.2.6-ga-20181009_1-1_amd64.deb && \
-sudo dpkg -i nv-tensorrt-repo-ubuntu1604-ga-cuda9.0-trt3.0.4-20180208_1-1_amd64.deb && \
+sudo dpkg -i sudo dpkg -i nv-tensorrt-repo-ubuntu1804-cuda10.0-trt5.0.2.6-ga-20181009_1-1_amd64.deb && \
+sudo apt-key add /var/nv-tensorrt-repo-cuda10.0-trt5.0.2.6-ga-20181009/7fa2af80.pub && \
 sudo apt-get update && \
 sudo apt-get -y install tensorrt && \
-sudo apt-get -y install python-libnvinfer-doc && \
+# then if using python 2.7 like me : && \
+sudo apt-get -y install python-libnvinfer-dev && \
+# If you plan to use TensorRT with TensorFlow && \
+# The graphsurgeon-tf package will also be installed with the above command : && \
 sudo apt-get -y install uff-converter-tf && \
-sudo apt-get install -y swig && \
 dpkg -l | grep TensorRT
 ```
+
+source : [Nvidia TensorRT install guide PDF](https://developer.download.nvidia.com/compute/machine-learning/tensorrt/docs/5.0/GA_5.0.2.6/TensorRT-Installation-Guide.pdf)
+
 A reboot can be appreciated to finalize the install of tensorrt
 
-# Ultimate install (deb), all in one (for splurgist people) :
-
-(unfinished)
-
 ```
-# cuda 10.0 deb : 
-# cudnn 7.5.0 deb :
-# tensorrt 5.0.2 deb :
-
+sudo reboot
 ```
 
-add paths as we saw earlier then reboots are included
+and thats it !
+
+it just works !!
 
 # Credits : 
 
@@ -183,14 +192,10 @@ Biggest sources :
 
 - https://medium.com/@mishra.thedeepak/cuda-and-cudnn-installation-for-tensorflow-gpu-79beebb356d2
 
-- https://kezunlin.me/post/dacc4196/
-
 Smaller sources :
 
-- https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt_304/tensorrt-install-guide/index.html
+- https://developer.download.nvidia.com/compute/machine-learning/tensorrt/docs/5.0/GA_5.0.2.6/TensorRT-Installation-Guide.pdf
 
 - https://developer.nvidia.com/rdp/cudnn-archive
-
-- https://developer.nvidia.com/nvidia-tensorrt3-download
 
 - https://medium.com/@zhanwenchen/install-cuda-and-cudnn-for-tensorflow-gpu-on-ubuntu-79306e4ac04e
