@@ -30,7 +30,7 @@ sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade &
 then : 
 
 - if you are on ubuntu **server** (google cloud, etc..), you dont have X 
-server issues, so you can start directly at 
+server issues, so you can continue directly at 
 [2)](#2-install-cuda-100-deb-local-ubuntu-1804-)
 
 - but if like most people you are on ubuntu desktop, on a brand new 
