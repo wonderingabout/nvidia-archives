@@ -148,13 +148,16 @@ some screenshots of the cudnn install process :
 
 ## easy post-install after cudnn :
 
-it is also advised to update database (reboot to finalize) :
+it is also advised to update database
+
+first we check if the libs can be located
 
 ```
 locate libcudart.so && locate libcudnn.so.7 && pwd
 ```
 
-then :
+then, most likely you will not be able to locate them, so we 
+update the database, then check again
 
 ```
 sudo updatedb && locate libcudart.so && locate libcudnn.so.7
@@ -187,6 +190,22 @@ sudo apt-get -y install python-libnvinfer-dev && \
 # The graphsurgeon-tf package will also be installed with the above command : && \
 sudo apt-get -y install uff-converter-tf && \
 dpkg -l | grep TensorRT
+```
+
+you can also check install with local libs, same as for cudnn : 
+
+first we check if the libs can be located
+
+```
+sudo updatedb && locate libnvinfer.so
+```
+
+result is something like this :
+
+```
+/usr/lib/x86_64-linux-gnu/libnvinfer.so
+/usr/lib/x86_64-linux-gnu/libnvinfer.so.5
+/usr/lib/x86_64-linux-gnu/libnvinfer.so.5.0.2
 ```
 
 source : [Nvidia TensorRT install guide PDF](https://developer.download.nvidia.com/compute/machine-learning/tensorrt/docs/5.0/GA_5.0.2.6/TensorRT-Installation-Guide.pdf)
