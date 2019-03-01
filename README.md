@@ -168,8 +168,9 @@ export PATH=/usr/local/cuda-9.0/bin:$PATH
 
 then save and exit, then :
 
-notes 2019 : maybe reboot now ?
-notes 2019 : some say do it with .sh maybe ?
+notes 2019 : do the same with a cuda.sh file now
+notes 2019 : and **reboot** !!! rebooting fixed pycuda install !!
+
 ```
 sudo nano /etc/profile.d/cuda.sh
 ```
@@ -180,6 +181,9 @@ sudo su -
 pip install pycuda
 
 ```
+
+
+
 then either in root mode or not, do :
 
 ```
