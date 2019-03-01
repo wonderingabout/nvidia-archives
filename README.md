@@ -192,6 +192,8 @@ then either in root mode or not, do :
 cd /opt/tensorrt/python && sudo pip2 install tensorrt-3.0.4-cp27-cp27mu-linux_x86_64.whl
 cd /opt/tensorrt/uff && sudo pip2 install uff-0.2.0-py2.py3-none-any.whl
 which convert-to-uff
+# update 2019 : maybe this one instead for trt 5.0 html doc : 
+# which convert-to-uff /usr/local/bin/convert-to-uff
 sudo apt-get -y install tree && cd /opt/tensorrt && tree include/ && cd lib && ls && cd .. && tree bin && cd samples/sampleMNIST && ls && make -j8 && cd /opt/tensorrt/bin && ./sample_mnist
 ```
 
