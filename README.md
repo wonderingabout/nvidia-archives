@@ -182,7 +182,9 @@ pip install pycuda
 
 ```
 
+sucess !!
 
+![pycuda-sucess](https://github.com/wonderingabout/nvidia-archives/blob/cuda9.0/pictures/pycuda%20sucess.png?raw=true)
 
 then either in root mode or not, do :
 
