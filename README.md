@@ -6,9 +6,7 @@ current master version :
 
 ```
 ubuntu 18.04
-CUDA 10.0 deb
-cudnn 7.5.0 deb for cuda 10.0
-tensorRT 5.0.2 deb for cuda 10.0
+cuda 10.2
 ```
 
 ![cuda1](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/pictures/10.0/cuda1.png)
@@ -19,7 +17,7 @@ The steps below are provided for a fresh brand new ubuntu 18.04 :
 
 # Easy installs
 
-## easy install help for cuda 10.0 local deb for ubuntu 18.04 :
+## easy install help for cuda 10.2 local deb for ubuntu 18.04 :
 
 ### 0) upgrade system
 
@@ -31,25 +29,35 @@ then :
 
 - if you are on ubuntu **server** (google cloud, etc..), you dont have X 
 server issues, so you can continue directly at 
-[2)](#2-install-cuda-100-deb-local-ubuntu-1804-)
+[2)](#2-install-cuda-102-deb-local-ubuntu-1804-)
 
 - but if like most people you are on ubuntu desktop, on a brand new 
-ubuntu **desktop** 18.04, it is easier to do the install in 2 steps : 
+ubuntu **desktop** 18.04, it is easier to do the install in 2 steps: 
 
-### 1) install display driver only from ppa
+### 1) install display driver first
 
-this may seem uneeded, but installing the cuda 10.0 directly in 
+this may seem uneeded, but installing the cuda 10.2 directly in 
 desktop ubuntu when nouveau is the default display driver often 
 breaks the X server
 
-but the ppa version has been tested to work
-for cuda 10.0, we need to install nvidia-driver-410 metapackage, 
-even if newer versions are available 
+It is possible to install the graphics driver from system 
+official repositories or from a ppa.
+
+More details about nvidia driver packages available for ubuntu here:
+[here](https://packages.ubuntu.com/search?suite=default&section=all&arch=any&keywords=nvidia&searchon=names)
+
+Also, for information about minimal nvidia driver version required 
+to match a CUDA version, it can be found
+[here](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html), 
+for example we can see that the minimal nvidia graphics driver required 
+to match cuda 10.2 is nvidia graphics driver version 440
+
+Here we are using the example of a ppa install
 
 ```
 sudo add-apt-repository -y ppa:graphics-drivers/ppa && \
 sudo apt-get update && \
-sudo apt-get -y install nvidia-driver-410 && \
+sudo apt-get -y install nvidia-driver-440 && \
 sudo reboot
 ```
 
@@ -58,26 +66,20 @@ as you can see, it works after reboot :
 ![ppa1](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/pictures/10.0/ppa1.png)
 
 we can also see the "software and updates" ubuntu 
-menu display out of curiosity : 
+menu display out of curiosity :
 
-below, nvidia-driver-410 is displayed to be "open source", but 
+below, nvidia-driver-440 is displayed to be "open source", but 
 dont mind it : we are using the proprietary driver as intended
 
 ![ppa2](https://raw.githubusercontent.com/wonderingabout/nvidia-archives/master/pictures/10.0/ppa2.png)
 
-### 2) install cuda 10.0 deb local ubuntu 18.04 :
+### 2) install cuda 10.2 deb local ubuntu 18.04 :
 
 ```
 # install some cuda dependencies && \
 sudo apt-get install gcc dkms build-essential && \
-# download and install cuda && \
-cd ~ && \
-wget https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda-repo-ubuntu1804-10-0-local-10.0.130-410.48_1.0-1_amd64 && \
-ls && \
-sudo dpkg -i cuda-repo-ubuntu1804-10-0-local-10.0.130-410.48_1.0-1_amd64 && \
-sudo apt-key add /var/cuda-repo-10-0-local-10.0.130-410.48/7fa2af80.pub && \
-sudo apt-get update && \
-sudo apt-get -y install cuda
+# then follow instructions and command-line here: && \
+# https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu && \
 ```
 
 a few screenshots of the install process : 
@@ -88,21 +90,19 @@ a few screenshots of the install process :
 
 do not reboot yet, do the post-install first : 
 
-## easy post-install for cuda 10.0 and before cudnn deb ubuntu 18.04 :
+## easy post-install for cuda 10.2 and before cudnn deb ubuntu 18.04 :
 
 ```
 sudo nano ~/.bashrc
 ```
 
 need to add this (at the end of the file, save and exit) 
+as explained in 
+[nvidia's official documentation](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#post-installation-actions)
 
 ```
-# add paths for cuda-10.0
-export PATH=${PATH}:/usr/local/cuda-10.0/bin
-
-# other nvidia paths that can be useful, for example for tensorrt
-export CUDA_INSTALL_DIR=/usr/local/cuda
-export CUDNN_INSTALL_DIR=/usr/local/cuda
+# add paths for cuda-10.2
+export PATH=/usr/local/cuda-10.2/bin:/usr/local/cuda-10.2/NsightCompute-2019.1${PATH:+:${PATH}}
 ```
 
 same as in this screenshot : 
@@ -126,12 +126,15 @@ now you can reboot to finalize
 sudo reboot
 ```
 
-## easy install help for cudnn 7.5.0 deb for cuda 10.0 deb ubuntu 18.04 :
+## easy install help for cudnn latest version deb for cuda 10.2 deb ubuntu 18.04 :
+
+**For cuDNN install, the trick is to remove all version names **
+**in filenames and use generic commands instead !!**
 
 ```
 cd ~ && \
-wget https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.5.0deb-cuda10.0deb/libcudnn7_7.5.0.56-1+cuda10.0_amd64.deb https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.5.0deb-cuda10.0deb/libcudnn7-dev_7.5.0.56-1+cuda10.0_amd64.deb https://github.com/wonderingabout/nvidia-archives/releases/download/cudnn7.5.0deb-cuda10.0deb/libcudnn7-doc_7.5.0.56-1+cuda10.0_amd64.deb && \
-sudo dpkg -i libcudnn7_7.5.0.56-1+cuda10.0_amd64.deb libcudnn7-dev_7.5.0.56-1+cuda10.0_amd64.deb libcudnn7-doc_7.5.0.56-1+cuda10.0_amd64.deb && \
+wget https://github.com/wonderingabout/nvidia-archives/releases/download/cuda-10.2/libcudnn7.deb https://github.com/wonderingabout/nvidia-archives/releases/download/cuda-10.2/libcudnn7-dev.deb https://github.com/wonderingabout/nvidia-archives/releases/download/cuda-10.2/libcudnn7-doc.deb && \
+sudo dpkg -i libcudnn7.deb libcudnn7-dev.deb libcudnn7-doc.deb && \
 sudo apt-get -y upgrade && \
 cp -r /usr/src/cudnn_samples_v7/ ~ && \
 cd ~/cudnn_samples_v7/mnistCUDNN && \
@@ -175,42 +178,7 @@ should display something like this :
 
 ```
 
-## Easy install for tensorrt 5.0.2 deb ubuntu 18.04 :
-
-```
-cd ~ && \
-wget https://github.com/wonderingabout/nvidia-archives/releases/download/tensorrt5.0.2deb-cuda10.0-ubuntu1804/nv-tensorrt-repo-ubuntu1804-cuda10.0-trt5.0.2.6-ga-20181009_1-1_amd64.deb && \
-sudo dpkg -i nv-tensorrt-repo-ubuntu1804-cuda10.0-trt5.0.2.6-ga-20181009_1-1_amd64.deb && \
-sudo apt-key add /var/nv-tensorrt-repo-cuda10.0-trt5.0.2.6-ga-20181009/7fa2af80.pub && \
-sudo apt-get update && \
-sudo apt-get -y install tensorrt && \
-# then if using python 2.7 like me : && \
-sudo apt-get -y install python-libnvinfer-dev && \
-# If you plan to use TensorRT with TensorFlow && \
-# The graphsurgeon-tf package will also be installed with the above command : && \
-sudo apt-get -y install uff-converter-tf && \
-dpkg -l | grep TensorRT
-```
-
-you can also check install with local libs, same as for cudnn : 
-
-first we check if the libs can be located
-
-```
-sudo updatedb && locate libnvinfer.so
-```
-
-result is something like this :
-
-```
-/usr/lib/x86_64-linux-gnu/libnvinfer.so
-/usr/lib/x86_64-linux-gnu/libnvinfer.so.5
-/usr/lib/x86_64-linux-gnu/libnvinfer.so.5.0.2
-```
-
-source : [Nvidia TensorRT install guide PDF](https://developer.download.nvidia.com/compute/machine-learning/tensorrt/docs/5.0/GA_5.0.2.6/TensorRT-Installation-Guide.pdf)
-
-A reboot can be appreciated to finalize the install of tensorrt
+A reboot can be appreciated to finalize the install of everything !
 
 ```
 sudo reboot
@@ -228,8 +196,5 @@ Biggest sources :
 
 Smaller sources :
 
-- https://developer.download.nvidia.com/compute/machine-learning/tensorrt/docs/5.0/GA_5.0.2.6/TensorRT-Installation-Guide.pdf
-
 - https://developer.nvidia.com/rdp/cudnn-archive
-
 - https://medium.com/@zhanwenchen/install-cuda-and-cudnn-for-tensorflow-gpu-on-ubuntu-79306e4ac04e
